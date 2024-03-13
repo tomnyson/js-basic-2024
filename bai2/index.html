@@ -4,16 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./style.css" />
-    <title>Document</title>
+    <title>bai 2</title>
   </head>
   <body>
     <div class="center">
-      <h1>chào mừng bạn đến với Javascrip cơ bản</h1>
+      <h1>js if else/ switch case</h1>
       <form action="">
         <input type="text" placeholder="So Thu 1" id="sothu1" />
         <input type="text" placeholder="So Thu 2" id="sothu2" />
-        <button onclick="showThongBao()" type="button">Cộng</button>
-        <button onclick="bai1()" type="button">bai1</button>
+        <select id="chucnang">
+          <option value="">chọn chức năng</option>
+          <option value="bai1">Tính giai thừa của một số: Viết một chương trình JavaScript</option>
+          <option value="bai2">x chia 2 va 4</option>
+          <option value="bai3">x chia 2 or 5</option>
+          <option value="bai4">tính điểm tb</option>
+        </select>
+        <button onclick="thucHienChucNang()" type="button">Tính</button>
+
         <p id="ketqua">kết quả là</p>
       </form>
       <p id="ten"></p>

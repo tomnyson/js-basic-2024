@@ -28,11 +28,18 @@ button {
     color: #fff;
     height: 50px;
     cursor: pointer;
-    display: block;
+    margin-bottom: 10px;
 }
 .center p{
     
     margin-left: auto;
     color: chartreuse;
     font-size: 20px;
+}
+select {
+    margin: 0 auto;
+    display: block;
+    height: 50px;
+    width: 50%;
+    margin-bottom: 10px;
 }

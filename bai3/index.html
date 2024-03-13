@@ -4,16 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./style.css" />
-    <title>Document</title>
+    <title>bai 3</title>
   </head>
   <body>
     <div class="center">
-      <h1>chào mừng bạn đến với Javascrip cơ bản</h1>
+      <h1>loop(for, while, do while)</h1>
       <form action="">
         <input type="text" placeholder="So Thu 1" id="sothu1" />
         <input type="text" placeholder="So Thu 2" id="sothu2" />
-        <button onclick="showThongBao()" type="button">Cộng</button>
-        <button onclick="bai1()" type="button">bai1</button>
+
+        <select id="chucnang">
+          <option value="">chọn chức năng</option>
+          <option value="bai1">gia thua</option>
+          <option value="bai2">nguyen to</option>
+          <option value="bai3">cuu chuong</option>
+        </select>
+        <button onclick="thucHienChucNang()" type="button">Tính</button>
         <p id="ketqua">kết quả là</p>
       </form>
       <p id="ten"></p>

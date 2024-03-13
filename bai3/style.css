@@ -16,11 +16,12 @@ form{
     border: 1px solid #333;
  
 }
-input {
+input, select {
     display: block;
     margin-bottom: 10px;
     width: 100%;
     height: 35px;
+    display: block;
 }
 button {
     width: 50%;
@@ -28,7 +29,7 @@ button {
     color: #fff;
     height: 50px;
     cursor: pointer;
-    display: block;
+    margin-bottom: 10px;
 }
 .center p{
     
