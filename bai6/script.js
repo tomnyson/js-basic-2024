@@ -45,7 +45,6 @@ for (let value in sinhvien) {
 `
 const ds_users = [
   {
-    id: 1,
     username: "admin",
     name: "admin",
     email: "admin@example.com",
@@ -53,7 +52,6 @@ const ds_users = [
     role: "admin",
   },
   {
-    id: 2,
     username: "user",
     name: "John Doe",
     email: "user@example.com",
@@ -140,3 +138,46 @@ console.log('cau 4', ds_users.length)
 cau4('admin', 'phuong')
 cau1()
  
+function handleSubmit() {
+  alert("Submit")
+  console.log("click here")
+  // lay gia tri tu form
+
+  const username= document.getElementById ("username").value
+  const name= document.getElementById ("name").value
+  const email= document.getElementById ("email").value
+  const password= document.getElementById ("password").value
+  const role= document.getElementById ("role").value
+  console.log ({username,name,email,password,role})
+  return false
+}
+
+function createTable() {
+  // loop array ds_users => render rows
+  const username= document.getElementById ("customer-rows")
+//   username.innerHTML = `<tr>
+//   <td>123</td>
+//   <td>3131</td>
+//   <td>3131</td>
+//   <td>31313</td>
+//   <td>3131</td>
+//   <td>Action</td>
+// </tr>`
+let rows ="";
+for(let i = 0; i < ds_users.length;i++){
+  let item= `<tr>
+  <td>${ds_users[i].username}</td>
+  <td>${ds_users[i].name}</td>
+  <td>${ds_users[i].email}</td>
+  <td>${ds_users[i].password}</td>
+  <td>${ds_users[i].role}</td>
+  <td>Action</td>
+  
+</tr>`
+rows+=item;
+
+}
+username.innerHTML =rows
+
+}
+createTable();

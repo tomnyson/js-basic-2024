@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>bai 6</title>
+  </head>
+  <body>
+    <div class="center">
+      <h1>Quản lý người dùng</h1>
+      <form onsubmit="return handleSubmit()">
+        <input type="text" placeholder="username" id="username" required />
+        <input type="text" placeholder="name" id="name" required />
+        <input type="text" placeholder="email" id="email" required />
+        <input type="text" placeholder="password" id="password" required />
+        <input type="text" placeholder="role" id="role" required />
+        <select id="chucnang">
+          <option value="">chọn quyền</option>
+          <option value="admin">admin</option>
+          <option value="user">user</option>
+        </select>
+        <input type="submit" value="create" />
+        <p id="ketqua">kết quả là</p>
+      </form>
+      <table id="customers">
+      <tr>
+        <th>username</th>
+        <th>name</th>
+        <th>email</th>
+        <th>password</th>
+        <th>role</th>
+        <th>Action</th>
+      </tr>
+      <tbody id="customer-rows">
+        <tr>
+          <td>username</td>
+          <td>name</td>
+          <td>email</td>
+          <td>password</td>
+          <td>role</td>
+          <td>Action</td>
+        </tr>
+      </tbody>
+
+      </table>
+    <script src="./script.js"></script>
+  </body>
+</html>
