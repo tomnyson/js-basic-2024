@@ -148,13 +148,34 @@ function handleSubmit() {
   const email= document.getElementById ("email").value
   const password= document.getElementById ("password").value
   const role= document.getElementById ("role").value
+  const user= {username: username, name: name, email: email, password: password, role: role}
+  console.log (user)
+  if(ktUserTonTai(username)){
+    alert("user da ton tai")
+    return false
+  }
+  ds_users.push(user)
+  createTable()
+  alert ('them thanh cong')
   console.log ({username,name,email,password,role})
   return false
 }
 
-function createTable() {
+function ktUserTonTai(username) {
+
+  for (let i = 0; i < ds_users.length; i++) {
+    if (ds_users[i].username == username ) {
+      console.log("Tai Da Ton Tai")
+      console.log(`${ds_users[i].role}`)
+      return true
+    } 
+  }
+  return false
+} 
+
+function createTable(data = ds_users) {
   // loop array ds_users => render rows
-  const username= document.getElementById ("customer-rows")
+  const users= document.getElementById ("customer-rows")
 //   username.innerHTML = `<tr>
 //   <td>123</td>
 //   <td>3131</td>
@@ -164,20 +185,85 @@ function createTable() {
 //   <td>Action</td>
 // </tr>`
 let rows ="";
-for(let i = 0; i < ds_users.length;i++){
+for(let i = 0; i < data.length;i++){
   let item= `<tr>
-  <td>${ds_users[i].username}</td>
-  <td>${ds_users[i].name}</td>
-  <td>${ds_users[i].email}</td>
-  <td>${ds_users[i].password}</td>
-  <td>${ds_users[i].role}</td>
-  <td>Action</td>
+  <td>${data[i].username}</td>
+  <td>${data[i].name}</td>
+  <td>${data[i].email}</td>
+  <td>${data[i].password}</td>
+  <td>${data[i].role}</td>
+  <td>
+    <button onclick="handleDelete('${data[i].username}')" class='delete'>Delete</button>
+    <button class='edit' onclick="handleEdit('${data[i].username}')">edit</button>
+  </td>
   
 </tr>`
 rows+=item;
 
 }
-username.innerHTML =rows
+users.innerHTML =rows
 
 }
 createTable();
+function handleDelete(username) {
+
+  //fruits.splice(2
+  alert('delete clicked'+ username);
+  let vt=-1;
+  for(var i=0; i<ds_users.length; i++)
+  {
+    if(ds_users[i].username==username)
+    {
+      vt=i; 
+      break
+    }
+  }
+  if(vt!=-1)
+  {
+    ds_users.splice(vt, 1);
+    console.log(ds_users);
+    alert("xoa thanh cong")
+  }
+  else{
+    alert("khong tim thay") 
+
+  }
+  createTable();
+
+}
+
+
+function handleEdit(username) {
+
+
+  //fruits.splice(2
+  alert('edit clicked'+ username);
+  let vt=-1;
+  for(var i=0; i<ds_users.length; i++)
+  {
+    if(ds_users[i].username==username)
+    {
+  document.getElementById ("username").value = ds_users[i].username;
+  document.getElementById ("name").value = ds_users[i].name;
+  document.getElementById ("email").value = ds_users[i].email;
+  document.getElementById ("password").value = ds_users[i].password ;
+  // document.getElementById ("role").value = ds_users[i].role;
+  document.getElementById ("role").options[1].selected = 'selected'
+      vt=i; 
+      break
+    }
+  }
+  //document.getElementById("nameofid").value = "My value";
+  // if(vt!=-1)
+  // {
+  //   ds_users.splice(vt, 1);
+  //   console.log(ds_users);
+  //   alert("xoa thanh cong")
+  // }
+  // else{
+  //   alert("khong tim thay") 
+
+  // }
+  createTable();
+
+}

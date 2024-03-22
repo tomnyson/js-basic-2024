@@ -60,3 +60,21 @@ button {
     background-color: #04AA6D;
     color: white;
   }
+
+  button.edit {
+    width: 50%;
+    background: #04AA6D;
+    color: #fff;
+    height: 25px;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+
+  button.delete {
+    width: 50%;
+    background: red;
+    color: #fff;
+    height: 25px;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
