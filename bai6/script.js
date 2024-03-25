@@ -109,12 +109,12 @@ function cau3() {
     role: "admin",
   }
   for (let i = 0; i < ds_users.length; i++) {
-    if (ds_users[i].username == new_sv.username ) {
+    if (ds_users[i].username == new_sv.username) {
       console.log("Tai Da Ton Tai")
       console.log(`${ds_users[i].role}`)
       return
     } else {
-        ds_users.push(new_sv)
+      ds_users.push(new_sv)
     }
   }
 }
@@ -124,69 +124,73 @@ cau1()
 
 function cau4(username, name_moi) {
   for (let i = 0; i < ds_users.length; i++) {
-    if (ds_users[i].username == username ) {
-      console.log(`${ds_users[i].role}`) 
+    if (ds_users[i].username == username) {
+      console.log(`${ds_users[i].role}`)
       console.log(`${ds_users[i].role}`)
       ds_users[i].name = name_moi
       return
     } else {
-        ds_users.push(new_sv)
+      ds_users.push(new_sv)
     }
   }
 }
-console.log('cau 4', ds_users.length)
-cau4('admin', 'phuong')
+console.log("cau 4", ds_users.length)
+cau4("admin", "phuong")
 cau1()
- 
-function handleSubmit() {
-  alert("Submit")
-  console.log("click here")
-  // lay gia tri tu form
 
-  const username= document.getElementById ("username").value
-  const name= document.getElementById ("name").value
-  const email= document.getElementById ("email").value
-  const password= document.getElementById ("password").value
-  const role= document.getElementById ("role").value
-  const user= {username: username, name: name, email: email, password: password, role: role}
-  console.log (user)
-  if(ktUserTonTai(username)){
-    alert("user da ton tai")
-    return false
+function handleSubmit() {
+  // lay gia tri tu form
+  const btn_action = document.getElementById("btn_action").value
+  const username = document.getElementById("username").value
+  const name = document.getElementById("name").value
+  const email = document.getElementById("email").value
+  const password = document.getElementById("password").value
+  const role = document.getElementById("role").value
+  const user = { username: username, name: name, email: email, password: password, role: role }
+  if (btn_action == "create") {
+    if (ktUserTonTai(username)) {
+      alert("user da ton tai")
+      return false
+    }
+    ds_users.push(user)
+    // chuyen mang => string
+    localStorage.setItem("users", JSON.stringify(ds_users));
+    alert("them thanh cong")
+  } else {
+    document.getElementById("btn_action").value = "create"
+    for (let i = 0; i < ds_users.length; i++) {
+      if (ds_users[i].username == username){
+        ds_users[i] = user;
+        alert("edit thanh cong")
+        break;
+      }
+    }
   }
-  ds_users.push(user)
   createTable()
-  alert ('them thanh cong')
-  console.log ({username,name,email,password,role})
   return false
 }
 
 function ktUserTonTai(username) {
-
   for (let i = 0; i < ds_users.length; i++) {
-    if (ds_users[i].username == username ) {
+    if (ds_users[i].username == username) {
       console.log("Tai Da Ton Tai")
       console.log(`${ds_users[i].role}`)
       return true
-    } 
+    }
   }
   return false
-} 
+}
 
-function createTable(data = ds_users) {
+function createTable() {
+  let data = []
+  if(localStorage.getItem("users")) {
+    data = JSON.parse(localStorage.getItem("users"))
+  }
   // loop array ds_users => render rows
-  const users= document.getElementById ("customer-rows")
-//   username.innerHTML = `<tr>
-//   <td>123</td>
-//   <td>3131</td>
-//   <td>3131</td>
-//   <td>31313</td>
-//   <td>3131</td>
-//   <td>Action</td>
-// </tr>`
-let rows ="";
-for(let i = 0; i < data.length;i++){
-  let item= `<tr>
+  const users = document.getElementById("customer-rows")
+  let rows = ""
+  for (let i = 0; i < data.length; i++) {
+    let item = `<tr>
   <td>${data[i].username}</td>
   <td>${data[i].name}</td>
   <td>${data[i].email}</td>
@@ -198,61 +202,49 @@ for(let i = 0; i < data.length;i++){
   </td>
   
 </tr>`
-rows+=item;
-
+    rows += item
+  }
+  users.innerHTML = rows
 }
-users.innerHTML =rows
-
-}
-createTable();
+createTable()
 function handleDelete(username) {
-
   //fruits.splice(2
-  alert('delete clicked'+ username);
-  let vt=-1;
-  for(var i=0; i<ds_users.length; i++)
-  {
-    if(ds_users[i].username==username)
-    {
-      vt=i; 
+  alert("delete clicked" + username)
+  let vt = -1
+  for (var i = 0; i < ds_users.length; i++) {
+    if (ds_users[i].username == username) {
+      vt = i
       break
     }
   }
-  if(vt!=-1)
-  {
-    ds_users.splice(vt, 1);
-    console.log(ds_users);
+  if (vt != -1) {
+    ds_users.splice(vt, 1)
+    console.log(ds_users)
     alert("xoa thanh cong")
+  } else {
+    alert("khong tim thay")
   }
-  else{
-    alert("khong tim thay") 
-
-  }
-  createTable();
-
+  createTable()
 }
-
 
 function handleEdit(username) {
-
-
   //fruits.splice(2
-  alert('edit clicked'+ username);
-  let vt=-1;
-  for(var i=0; i<ds_users.length; i++)
-  {
-    if(ds_users[i].username==username)
-    {
-  document.getElementById ("username").value = ds_users[i].username;
-  document.getElementById ("name").value = ds_users[i].name;
-  document.getElementById ("email").value = ds_users[i].email;
-  document.getElementById ("password").value = ds_users[i].password ;
-  // document.getElementById ("role").value = ds_users[i].role;
-  document.getElementById ("role").options[1].selected = 'selected'
-      vt=i; 
+  alert("edit clicked" + username)
+  let vt = -1
+  for (var i = 0; i < ds_users.length; i++) {
+    if (ds_users[i].username == username) {
+      document.getElementById("username").value = ds_users[i].username
+      document.getElementById("username").readOnly = true;
+      document.getElementById("name").value = ds_users[i].name
+      document.getElementById("email").value = ds_users[i].email
+      document.getElementById("password").value = ds_users[i].password
+      // document.getElementById ("role").value = ds_users[i].role;
+      document.getElementById("role").options[1].selected = "selected"
+      vt = i
       break
     }
   }
+  document.getElementById("btn_action").value = "edit"
   //document.getElementById("nameofid").value = "My value";
   // if(vt!=-1)
   // {
@@ -261,9 +253,8 @@ function handleEdit(username) {
   //   alert("xoa thanh cong")
   // }
   // else{
-  //   alert("khong tim thay") 
+  //   alert("khong tim thay")
 
   // }
-  createTable();
-
+  createTable()
 }
