@@ -147,46 +147,72 @@ function handleSubmit() {
   const password = document.getElementById("password").value
   const role = document.getElementById("role").value
   const user = { username: username, name: name, email: email, password: password, role: role }
+  const data = getDataToStore();
   if (btn_action == "create") {
     if (ktUserTonTai(username)) {
       alert("user da ton tai")
       return false
     }
-    ds_users.push(user)
+    data.push(user)
     // chuyen mang => string
-    localStorage.setItem("users", JSON.stringify(ds_users));
     alert("them thanh cong")
   } else {
     document.getElementById("btn_action").value = "create"
-    for (let i = 0; i < ds_users.length; i++) {
-      if (ds_users[i].username == username){
-        ds_users[i] = user;
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].username == username){
+        data[i] = user;
         alert("edit thanh cong")
         break;
       }
     }
   }
+  document.getElementById("username").readOnly = false;
+  setDataInStore("users", data)
   createTable()
   return false
 }
 
 function ktUserTonTai(username) {
-  for (let i = 0; i < ds_users.length; i++) {
-    if (ds_users[i].username == username) {
+  let data = getDataToStore()
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].username == username) {
       console.log("Tai Da Ton Tai")
-      console.log(`${ds_users[i].role}`)
+      console.log(`${data[i].role}`)
       return true
     }
   }
   return false
 }
 
-function createTable() {
-  let data = []
-  if(localStorage.getItem("users")) {
-    data = JSON.parse(localStorage.getItem("users"))
+// lay du lieu tu localstorage
+function getDataToStore() {
+  try {
+    let data = []
+    if(localStorage.getItem("users")) {
+      data = JSON.parse(localStorage.getItem("users"))
+    }
+    return data
+  } catch (e) {
+    throw new Error("Couldn't get data from store");
   }
+
+}
+//luu du lieu tu vao localstorage key, value
+function setDataInStore(key, data) {
+  try {
+    localStorage.setItem(key, JSON.stringify(data))
+    return true
+  } catch (e) {
+    console.error(e)
+    return false
+  }
+
+}
+
+function createTable() {
+  
   // loop array ds_users => render rows
+  const data = getDataToStore();
   const users = document.getElementById("customer-rows")
   let rows = ""
   for (let i = 0; i < data.length; i++) {
@@ -211,15 +237,16 @@ function handleDelete(username) {
   //fruits.splice(2
   alert("delete clicked" + username)
   let vt = -1
-  for (var i = 0; i < ds_users.length; i++) {
-    if (ds_users[i].username == username) {
+  let data = getDataToStore();
+  for (var i = 0; i < data.length; i++) {
+    if (data[i].username == username) {
       vt = i
       break
     }
   }
   if (vt != -1) {
-    ds_users.splice(vt, 1)
-    console.log(ds_users)
+    data.splice(vt, 1)
+    setDataInStore("users", data)
     alert("xoa thanh cong")
   } else {
     alert("khong tim thay")
@@ -231,6 +258,7 @@ function handleEdit(username) {
   //fruits.splice(2
   alert("edit clicked" + username)
   let vt = -1
+  
   for (var i = 0; i < ds_users.length; i++) {
     if (ds_users[i].username == username) {
       document.getElementById("username").value = ds_users[i].username
@@ -243,8 +271,10 @@ function handleEdit(username) {
       vt = i
       break
     }
+
   }
   document.getElementById("btn_action").value = "edit"
+
   //document.getElementById("nameofid").value = "My value";
   // if(vt!=-1)
   // {
