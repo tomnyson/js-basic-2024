@@ -9,13 +9,7 @@ img{
 .center {
     text-align: center;
 }
-form{
-    width: 50%;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #333;
- 
-}
+
 input, select {
     display: block;
     margin-bottom: 10px;
@@ -80,7 +74,6 @@ button {
   }
 
   form {
-    width: 300px;
     margin: 50px;
     background: #d2d2d2;
     padding: 20px;

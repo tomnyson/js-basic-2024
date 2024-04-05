@@ -17,6 +17,24 @@
     }
     return false;
   }
+
+  function handleloginSubmit() {
+    const username = document.getElementById("username").value
+    const password = document.getElementById("password").value
+    // lay du lieu tu localstorage
+    let users = getDataToStore()
+    // kiem tra ton tai cua user username, password
+    for(let i = 0 ; i < users.length ; i++){
+      if(users[i].username == username && users[i].password == password){
+        alert("dang nhap thanh cong ")
+        // redirect to dashboard
+        localStorage.setItem("user", JSON.stringify(users[i]))
+        window.location.href = "./index.html";
+        return false;
+      } 
+    }
+      alert('tai khoan hoac mat khau khong ton tai')
+  }
   
   function getDataToStore() {
     try {

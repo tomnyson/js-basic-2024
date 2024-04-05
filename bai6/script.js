@@ -1,3 +1,12 @@
+const currentUser = localStorage.getItem("user")
+if(!currentUser) {
+  window.location.href = "./login.html";
+} else {
+  const parseUser = JSON.parse(currentUser);
+  document.getElementById("welcome").innerHTML= `Xin chào: ${parseUser.name}`
+}
+console.log("currentUser = ",currentUser);
+
 // cach khai bao
 const sinhvien = {
   ten: "nguyen van a",
@@ -288,3 +297,9 @@ function handleEdit(username) {
   // }
   createTable()
 }
+function logout() {
+ localStorage.removeItem("user");
+ alert("logout thanh cong");
+ window.location.href = "./login.html";
+}
+
