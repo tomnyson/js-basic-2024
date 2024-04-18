@@ -1,0 +1,45 @@
+h1{
+    color: green;
+    font-weight: bold;
+}
+img{
+    width: 300px;
+    object-fit: contain;
+}
+.center {
+    text-align: center;
+}
+form{
+    width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #333;
+ 
+}
+input {
+    display: block;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 35px;
+}
+button {
+    width: 50%;
+    background: green;
+    color: #fff;
+    height: 50px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+.center p{
+    
+    margin-left: auto;
+    color: chartreuse;
+    font-size: 20px;
+}
+select {
+    margin: 0 auto;
+    display: block;
+    height: 50px;
+    width: 50%;
+    margin-bottom: 10px;
+}
